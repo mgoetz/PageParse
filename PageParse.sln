@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageParse", "PageParse\PageParse.csproj", "{9EAAB885-5A12-4CCA-99D7-1AFA212815A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PageParseTest", "PageParseTest\PageParseTest.csproj", "{86BD7359-DD8C-43C4-B7B1-EF8611577B1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9EAAB885-5A12-4CCA-99D7-1AFA212815A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EAAB885-5A12-4CCA-99D7-1AFA212815A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EAAB885-5A12-4CCA-99D7-1AFA212815A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EAAB885-5A12-4CCA-99D7-1AFA212815A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86BD7359-DD8C-43C4-B7B1-EF8611577B1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86BD7359-DD8C-43C4-B7B1-EF8611577B1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86BD7359-DD8C-43C4-B7B1-EF8611577B1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86BD7359-DD8C-43C4-B7B1-EF8611577B1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
