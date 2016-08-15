@@ -55,7 +55,7 @@ That's a great question, Here are the assumptions I thought worth calling out ex
 <h2>Neat, how do I use it?</h2>
 To get started, enter an address in the text input field below and hit &apos;Enter&apos; or click the &apos;Parse Page&apos; button.
 
-<form action="ParsePage" method="post" enctype="application/x-www-form-urlencoded">
+<form action="/Home/ParsePage" method="post" enctype="application/x-www-form-urlencoded">
     <div>
         <label for="userInput">Enter your URI here: </label>
     </div>
@@ -67,7 +67,7 @@ To get started, enter an address in the text input field below and hit &apos;Ent
     </div>
 </form>
 
-@if (ViewBag.userInput != null)
+@if (ViewBag.userInput != null && ViewBag.userInput != "")
 {
     if (ViewBag.ErrorMessage != null)
     {
@@ -77,61 +77,61 @@ To get started, enter an address in the text input field below and hit &apos;Ent
     else
     {
         <h2>The images and 10 most common words, and page at <em>@Html.Raw(ViewBag.userInput)</em> are shown below:</h2>
-    }
-    if (ViewBag.WordCountList != null)
-    {
-        <table>
-            <thead>
-                <tr>
-                    <th>Word</th>
-                    <th>Frequency</th>
-                    <th>Rank</th>
-                </tr>
-            </thead>
-            <tbody>
-                @{ // variables used to properly rank ties
-                    int rank = 0;
-                    int preceedingWordfrequency = Int32.MaxValue;
-                    int numberAtCurrentRank = 1;
-                }
-                @foreach (KeyValuePair<string, int> countedWord in ViewBag.WordCountList)
-                {
-                    { // Managing the ranks for tied word-frequencies
-                        if (countedWord.Value == preceedingWordfrequency)
-                        {
-                            numberAtCurrentRank++;
-                        }
-                        else
-                        {
-                            rank += numberAtCurrentRank;
-                            numberAtCurrentRank = 1;
-                            preceedingWordfrequency = countedWord.Value;
-                        }
-
-                    }
+        if (ViewBag.WordCountList != null)
+        {
+            <table>
+                <thead>
                     <tr>
-                        <td class="word">
-                            @countedWord.Key
-                        </td>
-                        <td class="frequency">
-                            @countedWord.Value
-                        </td>
-                        <td class="rank">
-                            @rank
-                        </td>
+                        <th>Word</th>
+                        <th>Frequency</th>
+                        <th>Rank</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @{ // variables used to properly rank ties
+                        int rank = 0;
+                        int preceedingWordfrequency = Int32.MaxValue;
+                        int numberAtCurrentRank = 1;
                     }
-
-                    if (ViewBag.ImageURLs != null)
+                    @foreach (KeyValuePair<string, int> countedWord in ViewBag.WordCountList)
                     {
-                        <div class="slider found_images">
-                            @foreach (string imageURL in ViewBag.ImageURLs)
+                        { // Managing the ranks for tied word-frequencies
+                            if (countedWord.Value == preceedingWordfrequency)
                             {
-                                <img src="@imageURL" />
+                                numberAtCurrentRank++;
                             }
-                        </div>
+                            else
+                            {
+                                rank += numberAtCurrentRank;
+                                numberAtCurrentRank = 1;
+                                preceedingWordfrequency = countedWord.Value;
+                            }
+
                         }
+                        <tr>
+                            <td class="word">
+                                @countedWord.Key
+                            </td>
+                            <td class="frequency">
+                                @countedWord.Value
+                            </td>
+                            <td class="rank">
+                                @rank
+                            </td>
+                        </tr>
                     }
+                </tbody>
+            </table>
+        }
+
+        if (ViewBag.ImageURLs != null)
+        {
+            <div class="slider found_images">
+                @foreach (string imageURL in ViewBag.ImageURLs)
+                {
+                    <img src="@imageURL" />
+                }
+            </div>
+        }
+    }
+ }

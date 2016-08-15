@@ -22,7 +22,6 @@ namespace PageParse.Tools
         public static IEnumerable<string> GetImageRelativeURLS(string rawContent)
         {
             IEnumerable<string> returnValue = new List<string>();
-
             HtmlDocument htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(rawContent);
 
@@ -36,6 +35,4 @@ namespace PageParse.Tools
             return returnValue;
         }
     }
-
-
 }
