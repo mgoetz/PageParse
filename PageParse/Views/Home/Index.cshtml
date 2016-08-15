@@ -1,31 +1,137 @@
-﻿@{
+﻿@using PageParse.Extensions;
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+
+
+<h1>
+Hello and welcome to the PageParse demo application.
+</h1>
+
+<h2>
+    Why?
+</h2>
+The purpose of this application is to demonstrate code and development practices though the creation of a small web aplication.
+
+<h2>
+    Ok, what does it do?
+</h2>
+Targeting an arbitrary webpage, this app will:
+
+<ol>
+    <li>
+        Count all user visable words (including alt and title attributes) and display a list of the 10 most commonly used with their frequency
+    </li>
+    <li>
+        Extract and display all images linked directly by the page.
+    </li>
+</ol>
+
+<h2>
+    What assumptions did you make?
+</h2>
+That's a great question, Here are the assumptions I thought worth calling out explicitly:
+<ul>
+    <li>
+        'Words' may contain, or be entireley composed of digits
+    </li>
+    <li>
+        The user only wants to ever see 10 words, even when words #11-n are tied with #10 in frequency
+    </li>
+    <li>
+        IFramed content doesnt count.  Words or images.
+    </li>
+    <li>
+        All images are acessable to any user. No special checks or security exist around retreiving the images.
+    </li>
+    <li>
+        All images and words to process exist on firt load of the page, and are not asynchronusly loaded later.
+    </li>
+</ul>
+
+<h2>Neat, how do I use it?</h2>
+To get started, enter an address in the text input field below and hit &apos;Enter&apos; or click the &apos;Parse Page&apos; button.
+
+<form action="ParsePage" method="post" enctype="application/x-www-form-urlencoded">
+    <div>
+        <label for="userInput">Enter your URI here: </label>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div>
+        <input name="userInput" type="text" placeholder="URI should be for HTTP or HTTPS" value="@ViewBag.userInput" />
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div>
+        <input type="submit" value="Parse the page!" />
     </div>
-</div>
+</form>
+
+@if (ViewBag.userInput != null)
+{
+    if (ViewBag.ErrorMessage != null)
+    {
+        <h2>The page at <em>@ViewBag.userInput</em> could not be processed.</h2>
+        <h3>@ViewBag.ErrorMessage</h3>
+    }
+    else
+    {
+        <h2>The images and 10 most common words, and page at <em>@Html.Raw(ViewBag.userInput)</em> are shown below:</h2>
+    }
+    if (ViewBag.WordCountList != null)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Word</th>
+                    <th>Frequency</th>
+                    <th>Rank</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ // variables used to properly rank ties
+                    int rank = 0;
+                    int preceedingWordfrequency = Int32.MaxValue;
+                    int numberAtCurrentRank = 1;
+                }
+                @foreach (KeyValuePair<string, int> countedWord in ViewBag.WordCountList)
+                {
+                    { // Managing the ranks for tied word-frequencies
+                        if (countedWord.Value == preceedingWordfrequency)
+                        {
+                            numberAtCurrentRank++;
+                        }
+                        else
+                        {
+                            rank += numberAtCurrentRank;
+                            numberAtCurrentRank = 1;
+                            preceedingWordfrequency = countedWord.Value;
+                        }
+
+                    }
+                    <tr>
+                        <td class="word">
+                            @countedWord.Key
+                        </td>
+                        <td class="frequency">
+                            @countedWord.Value
+                        </td>
+                        <td class="rank">
+                            @rank
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    if (ViewBag.ImageURLs != null)
+    {
+        <div class="slider found_images">
+            @foreach (string imageURL in ViewBag.ImageURLs)
+            {
+                <img src="@imageURL" />
+            }
+        </div>
+    }
+}
