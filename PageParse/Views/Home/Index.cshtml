@@ -12,7 +12,7 @@
 </h1>
 
 <h2>
-    Why?
+    Why does this page exist?
 </h2>
 The purpose of this application is to demonstrate code and development practices though the creation of a small web aplication.
 
@@ -128,7 +128,7 @@ To get started, enter an address in the text input field below and hit &apos;Ent
         if (ViewBag.ImageURLs != null)
         {
             <h3>Images:</h3>
-            <div class="slider found_images">
+            <div class="found_images">
                 @foreach (string imageURL in ViewBag.ImageURLs)
                 {
                     <div><img src="@imageURL" /></div>
