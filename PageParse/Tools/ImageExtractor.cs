@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using HtmlAgilityPack;
+using PageParse.Extensions;
 
 
 namespace PageParse.Tools
@@ -28,7 +29,7 @@ namespace PageParse.Tools
             var allNodes = htmlDoc.DocumentNode.DescendantsAndSelf();
             var imageNodes = allNodes.Where(node => node.Name == "img");
             var imagePaths = imageNodes.Select(node => node.GetAttributeValue("src", ""));
-            var nonEmptyImagePaths = imagePaths.Where(src => !string.IsNullOrEmpty(src));//Consider a stringextention
+            var nonEmptyImagePaths = imagePaths.Where(src => !src.IsNullOrEmpty());
 
             returnValue = nonEmptyImagePaths.ToList();
 

@@ -208,6 +208,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Tools\AbsolutePathDeterminer.cs" />
     <Compile Include="Tools\WordExtractor.cs" />
     <Compile Include="Tools\ImageExtractor.cs" />

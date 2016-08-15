@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using HtmlAgilityPack;
 using System.Text;
+using PageParse.Extensions;
 
 namespace PageParse.Tools
 {
@@ -33,7 +34,7 @@ namespace PageParse.Tools
                 string altText = node.GetAttributeValue("alt", string.Empty);
                 string titleText = node.GetAttributeValue("title", string.Empty);
                 string rawNodeText = (node.NodeType == HtmlNodeType.Text) ? node.InnerText : string.Empty;
-                string cleanedNodeText = Regex.Replace(HttpUtility.HtmlDecode(rawNodeText), "[^A-Za-z0-9]", " ");//TODO: write this regexreplace as a string extention
+                string cleanedNodeText = HttpUtility.HtmlDecode(rawNodeText).RemoveNonWordCharacters();
                 stringBuilder.Append(altText);
                 stringBuilder.Append(" ");
                 stringBuilder.Append(titleText);
