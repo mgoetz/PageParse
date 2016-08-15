@@ -27,4 +27,7 @@ Pull the repository down from GitHub, open it in Visual Studio 2015, and hit Ctr
  - Download the app from https://github.com/mgoetz/PageParse/blob/Reconstruction/PageParse_1.0_MattGoetz.rar
  - Unzip the contents to a folder in your prefered location for running websites
  - Create a new site in IIS and point it at the location where you unpacked the rar file
- - *Update the application pool created for the IIS site to .NET 4.0 
+ - *Update the application pool created for the IIS site to .NET 4.0
+ 
+##Why didnt you host this on Azure?
+Good question.  I'm currenlty working on deploying it there, but have not yet succeeded.  When I do, you will be able to explore the app at http://parsepage-goetzonline.azurewebsites.net/
