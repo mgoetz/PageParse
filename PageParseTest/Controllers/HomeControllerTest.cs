@@ -15,10 +15,10 @@ namespace PageParseTest.Controllers
         [TestCase("", "index", TestName = "PageParse_NoInput_ReturnsView")]
         [TestCase("https://www.google.com", "index", TestName = "PageParse_Google_ReturnsView")]
         [TestCase("http://www.cnn.com", "index", TestName = "PageParse_Cnn_ReturnsView")]
-        public void PageParse_CaseInput_ReturnsExpectedView(string targetPage, string viewName)
+        public void ParsePage_CaseInput_ReturnsExpectedView(string targetPage, string viewName)
         {
             // Arrange
-            HomeController controllerUnderTest = new HomeController();
+            ParsePageController controllerUnderTest = new ParsePageController();
 
             //Act
             ViewResult result = controllerUnderTest.ParsePage(targetPage) as ViewResult;
@@ -29,10 +29,10 @@ namespace PageParseTest.Controllers
 
         [TestCase("ThisIsNotAVlidURI")]
         [TestCase("1337 h4xxx")]
-        public void PageParse_BadURI_ViewBagHasErrorMessage(string badTargetUri)
+        public void ParsePage_BadURI_ViewBagHasErrorMessage(string badTargetUri)
         {
             // Arrange
-            HomeController controllerUnderTest = new HomeController();
+            ParsePageController controllerUnderTest = new ParsePageController();
 
             //Act
             ViewResult result = controllerUnderTest.ParsePage(badTargetUri) as ViewResult;
@@ -43,10 +43,10 @@ namespace PageParseTest.Controllers
 
         [TestCase("https://www.google.com")]
         [TestCase("http://www.cnn.com")]
-        public void PageParse_GoodURI_ViewBagHasNoErrorMessage(string goodTargetUri)
+        public void ParsePage_GoodURI_ViewBagHasNoErrorMessage(string goodTargetUri)
         {
             // Arrange
-            HomeController controllerUnderTest = new HomeController();
+            ParsePageController controllerUnderTest = new ParsePageController();
 
             //Act
             ViewResult result = controllerUnderTest.ParsePage(goodTargetUri) as ViewResult;

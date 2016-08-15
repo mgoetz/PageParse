@@ -13,10 +13,15 @@ namespace PageParse
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //    name: "siteroot",
+            //    url: "",
+            //    defaults: new { controller = "ParsePage", action = "ParsePage", id = "" }
+            //);
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "ParsePage", action = "ParsePage", id = UrlParameter.Optional }
             );
         }
     }
