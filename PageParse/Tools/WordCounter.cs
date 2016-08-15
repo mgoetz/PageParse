@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using PageParse.Extensions;
 
 namespace PageParse.Tools
 {
@@ -21,7 +22,7 @@ namespace PageParse.Tools
         public static WordCountList CountWords(string rawInput)
         {
             WordCountList returnVal = new WordCountList();
-            string stripped = Regex.Replace(rawInput, "[^A-Za-z0-9]", " ");
+            string stripped = rawInput.RemoveNonWordCharacters();
 
             string[] splitInput = stripped.ToLowerInvariant().Split(seperators, StringSplitOptions.RemoveEmptyEntries);
             foreach (string word in splitInput)

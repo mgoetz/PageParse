@@ -7,6 +7,9 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <!-- Slick carousel styles -->
+    <link rel="stylesheet" type="text/css" href="/Content/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="/Content/slick/slick-theme.css" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -39,6 +42,18 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
+    <script type="text/javascript" src="/Scripts/slick/slick.min.js"></script>
+    <script>
+        $('.found_images').slick({
+            dots: true,
+            infinite: true,
+            variableWidth: true,
+            
+            lazyLoad: 'ondemand',
+            fade: true
+        });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
