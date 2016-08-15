@@ -7,9 +7,10 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    <!-- Slick carousel styles -->
-    <link rel="stylesheet" type="text/css" href="/Content/slick/slick.css" />
-    <link rel="stylesheet" type="text/css" href="/Content/slick/slick-theme.css" />
+    <!-- Owl Carousel files -->
+    <link rel="stylesheet" type="text/css" href="~/Content/OwlCarousel/owl.carousel.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/OwlCarousel/owl.theme.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/OwlCarousel/owl.transitions.css" />
 </head>
 <body>
 
@@ -24,15 +25,21 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
-    <script type="text/javascript" src="/Scripts/slick/slick.min.js"></script>
+    <script type="text/javascript" src="/Scripts/owl.carousel.min.js"></script>
     <script>
-        $('.found_images').slick({
-            dots: true,
-            infinite: true,
-            variableWidth: true,
-            
-            lazyLoad: 'ondemand',
-            fade: true
+        $(document).ready(function() {
+            $('.found_images').owlCarousel({
+ 
+                autoPlay: 5000, //Set AutoPlay to 5 seconds
+                navigation: true, //Show next/previous buttons
+                items : 1,  //One image at a time
+                itemsDesktop: false,
+                itemsDesktopSmall : false,
+                itemsTablet: false,
+                itemsMobile : false
+ 
+            });
+
         });
     </script>
     @RenderSection("scripts", required: false)

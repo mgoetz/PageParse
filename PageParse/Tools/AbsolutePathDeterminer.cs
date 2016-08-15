@@ -32,9 +32,12 @@ namespace PageParse.Tools
 
             Uri page = new Uri(pageUrl);
 
-            if (imageSrc.StartsWith("//"))
+            if (imageSrc.StartsWith("data:")) {
+                returnValue = imageSrc;
+            }
+            else if (imageSrc.StartsWith("//"))
             {
-                returnValue = page.Scheme + Uri.SchemeDelimiter + imageSrc.Remove(0, 2);
+                    returnValue = page.Scheme + Uri.SchemeDelimiter + imageSrc.Remove(0, 2);
             }
             else if (imageSrc.StartsWith("/"))
             {

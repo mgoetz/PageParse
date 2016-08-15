@@ -76,7 +76,8 @@ To get started, enter an address in the text input field below and hit &apos;Ent
     }
     else
     {
-        <h2>The images and 10 most common words, and page at <em>@Html.Raw(ViewBag.userInput)</em> are shown below:</h2>
+        <h2>The images and 10 most common words, and page at <em>@Html.Raw(ViewBag.userInput)</em> are shown below</h2>
+        <h3>Top 10 Words:</h3>
         if (ViewBag.WordCountList != null)
         {
             <table>
@@ -126,10 +127,11 @@ To get started, enter an address in the text input field below and hit &apos;Ent
 
         if (ViewBag.ImageURLs != null)
         {
+            <h3>Images:</h3>
             <div class="slider found_images">
                 @foreach (string imageURL in ViewBag.ImageURLs)
                 {
-                    <img src="@imageURL" />
+                    <div><img src="@imageURL" /></div>
                 }
             </div>
         }
