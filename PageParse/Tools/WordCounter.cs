@@ -73,7 +73,7 @@ namespace PageParse.Tools
         public IEnumerable<KeyValuePair<string, int>> WordsByFrequency
         {
             get {
-                return this.OrderByDescending(x => x.Value);
+                return this.OrderByDescending(x => x.Value).ThenBy(y => y.Key);
             }
         }
     }
